@@ -16,7 +16,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin && process.env.NODE_ENV === 'development') return callback(null, true)
+    if (!origin) return callback(null, true)
     if (allowedOrigins.includes(origin)) return callback(null, true)
     callback(new Error(`CORS blocked: ${origin}`))
   },
