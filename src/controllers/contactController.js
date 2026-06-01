@@ -1,4 +1,4 @@
-const transporter = require('../config/mailer')
+const { sendMail } = require('../config/mailer')
 
 function validate({ name, email, subject, message }) {
   const errors = {}
@@ -18,11 +18,8 @@ exports.sendContact = async (req, res) => {
   }
 
   try {
-    // 1. உங்களுக்கு notification
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+    await sendMail({
       to: process.env.EMAIL_TO,
-      replyTo: email,
       subject: `[Portfolio] ${subject}`,
       html: `
         <div style="font-family:'Helvetica Neue',sans-serif;max-width:560px;margin:0 auto;background:#0d0d0d;color:#e8e8e8;border-radius:12px;overflow:hidden;">
@@ -54,66 +51,34 @@ exports.sendContact = async (req, res) => {
       `,
     })
 
-    // 2. Sender-க்கு auto-reply — Option 1 (Warm & Professional)
-    await transporter.sendMail({
-      from: `"Subash Nagamuthu" <${process.env.EMAIL_USER}>`,
+    await sendMail({
       to: email,
       subject: `Hey ${name.split(' ')[0]}, your message landed safely! 🎯`,
       html: `
         <div style="font-family:'Helvetica Neue',sans-serif;max-width:520px;margin:0 auto;background:#0d0d0d;color:#e8e8e8;border-radius:12px;overflow:hidden;">
-
-          <!-- Header -->
           <div style="background:linear-gradient(135deg,#1a1a1a,#111);padding:36px 32px;border-bottom:1px solid rgba(201,168,76,0.3);">
             <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.4em;color:#c9a84c;text-transform:uppercase;">Subash Nagamuthu</p>
             <h1 style="margin:0;font-size:26px;font-weight:700;color:#fff;">Full Stack Developer</h1>
           </div>
-
-          <!-- Body -->
           <div style="padding:36px 32px;">
-
-            <h2 style="margin:0 0 20px;font-size:22px;color:#fff;">
-              Hey ${name.split(' ')[0]}! 👋
-            </h2>
-
+            <h2 style="margin:0 0 20px;font-size:22px;color:#fff;">Hey ${name.split(' ')[0]}! 👋</h2>
             <p style="margin:0 0 16px;font-size:15px;line-height:1.8;color:#bbb;">
               Your message landed safely. I'll review it and get back to you within
               <strong style="color:#c9a84c;">24 hours</strong>.
-              Looking forward to connecting!
             </p>
-
-            <p style="margin:0 0 28px;font-size:15px;line-height:1.8;color:#bbb;">
-              In the meantime, feel free to check out my work or connect with me on LinkedIn.
-            </p>
-
-            <!-- Message recap -->
             <div style="padding:18px 20px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:10px;margin-bottom:28px;">
               <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.35em;color:#888;text-transform:uppercase;">Your message</p>
               <p style="margin:0;font-size:14px;color:#ccc;font-style:italic;">"${subject}"</p>
             </div>
-
-            <!-- CTA buttons -->
-            <div style="display:flex;gap:12px;flex-wrap:wrap;">
-              <a href="https://linkedin.com/in/subash-nagamuthu-32011428b"
-                target="_blank"
-                style="display:inline-block;padding:12px 22px;background:#c9a84c;color:#000;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:0.1em;border-radius:6px;">
-                LINKEDIN →
-              </a>
-              <a href="tel:+918667845144"
-                style="display:inline-block;padding:12px 22px;background:transparent;color:#c9a84c;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:0.1em;border-radius:6px;border:1px solid rgba(201,168,76,0.4);">
-                +91 8667845144
-              </a>
-            </div>
-
+            <a href="https://linkedin.com/in/subash-nagamuthu-32011428b"
+              style="display:inline-block;padding:12px 22px;background:#c9a84c;color:#000;text-decoration:none;font-size:12px;font-weight:700;border-radius:6px;">
+              LINKEDIN →
+            </a>
           </div>
-
-          <!-- Footer -->
           <div style="padding:20px 32px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.06);">
-            <p style="margin:0;font-size:13px;color:#666;">
-              — Subash Nagamuthu<br>
-              <span style="font-size:11px;color:#444;">Full Stack Developer · Tamil Nadu, India</span>
-            </p>
+            <p style="margin:0;font-size:13px;color:#666;">— Subash Nagamuthu<br>
+            <span style="font-size:11px;color:#444;">Full Stack Developer · Tamil Nadu, India</span></p>
           </div>
-
         </div>
       `,
     })
