@@ -1,0 +1,52 @@
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const { notFound, errorHandler } = require('./middleware/errorHandler')
+
+const app = express()
+const PORT = process.env.PORT || 5000
+
+// CORS
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  process.env.CLIENT_URL,
+].filter(Boolean)
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin && process.env.NODE_ENV === 'development') return callback(null, true)
+    if (allowedOrigins.includes(origin)) return callback(null, true)
+    callback(new Error(`CORS blocked: ${origin}`))
+  },
+  methods: ['GET', 'POST'],
+  credentials: true,
+}))
+
+app.use(express.json({ limit: '10kb' }))
+app.use(express.urlencoded({ extended: true }))
+
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', uptime: process.uptime().toFixed(2) + 's' })
+})
+
+// Routes
+app.use('/api/contact', require('./routes/contact'))
+app.use('/api', require('./routes/portfolio'))
+
+app.use(notFound)
+app.use(errorHandler)
+
+app.listen(PORT, () => {
+  console.log(`\n🚀 Server running on http://localhost:${PORT}`)
+  console.log(`📋 Environment : ${process.env.NODE_ENV || 'development'}`)
+  console.log(`📨 Email To    : ${process.env.EMAIL_TO || '(not set)'}`)
+  console.log(`\n📡 API Endpoints:`)
+  console.log(`   GET  /health`)
+  console.log(`   POST /api/contact`)
+  console.log(`   GET  /api/projects`)
+  console.log(`   GET  /api/experiences`)
+  console.log(`   GET  /api/testimonials`)
+  console.log(`   GET  /api/services\n`)
+})
