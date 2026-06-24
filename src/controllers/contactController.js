@@ -57,7 +57,7 @@ exports.sendContact = async (req, res) => {
       html: `
         <div style="font-family:'Helvetica Neue',sans-serif;max-width:520px;margin:0 auto;background:#0d0d0d;color:#e8e8e8;border-radius:12px;overflow:hidden;">
           <div style="background:linear-gradient(135deg,#1a1a1a,#111);padding:36px 32px;border-bottom:1px solid rgba(201,168,76,0.3);">
-            <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.4em;color:#c9a84c;text-transform:uppercase;">Subash Nagamuthu</p>
+            <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.4em;color:#c9a84c;text-transform:uppercase;">Zhanx Studio</p>
             <h1 style="margin:0;font-size:26px;font-weight:700;color:#fff;">Full Stack Developer</h1>
           </div>
           <div style="padding:36px 32px;">
@@ -76,7 +76,7 @@ exports.sendContact = async (req, res) => {
             </a>
           </div>
           <div style="padding:20px 32px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.06);">
-            <p style="margin:0;font-size:13px;color:#666;">— Subash Nagamuthu<br>
+            <p style="margin:0;font-size:13px;color:#666;">— Zhanx Studio<br>
             <span style="font-size:11px;color:#444;">Full Stack Developer · Tamil Nadu, India</span></p>
           </div>
         </div>
