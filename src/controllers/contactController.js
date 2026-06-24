@@ -70,14 +70,14 @@ exports.sendContact = async (req, res) => {
               <p style="margin:0 0 6px;font-size:10px;letter-spacing:0.35em;color:#888;text-transform:uppercase;">Your message</p>
               <p style="margin:0;font-size:14px;color:#ccc;font-style:italic;">"${subject}"</p>
             </div>
-            <a href="https://linkedin.com/in/subash-nagamuthu-32011428b"
+            <a href="mailto:zhanxstudio@gmail.com"
               style="display:inline-block;padding:12px 22px;background:#c9a84c;color:#000;text-decoration:none;font-size:12px;font-weight:700;border-radius:6px;">
-              LINKEDIN →
+              CONTACT →
             </a>
           </div>
           <div style="padding:20px 32px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.06);">
             <p style="margin:0;font-size:13px;color:#666;">— Zhanx Studio<br>
-            <span style="font-size:11px;color:#444;">Full Stack Developer · Tamil Nadu, India</span></p>
+            <span style="font-size:11px;color:#444;">Full Stack Developer</span></p>
           </div>
         </div>
       `,
