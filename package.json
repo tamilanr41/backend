@@ -1,7 +1,7 @@
 {
   "name": "subash-portfolio-backend",
   "version": "1.0.0",
-  "description": "Backend API for Subash Nagamuthu's Portfolio",
+  "description": "Backend API for Zhanx Studio Portfolio",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
