@@ -18,10 +18,11 @@ exports.sendContact = async (req, res) => {
   }
 
   try {
-    await sendMail({
-      to: process.env.EMAIL_TO,
-      subject: `[Portfolio] ${subject}`,
-      html: `
+    await Promise.all([
+      sendMail({
+        to: process.env.EMAIL_TO,
+        subject: `[Portfolio] ${subject}`,
+        html: `
         <div style="font-family:'Helvetica Neue',sans-serif;max-width:560px;margin:0 auto;background:#0d0d0d;color:#e8e8e8;border-radius:12px;overflow:hidden;">
           <div style="background:linear-gradient(135deg,#1a1a1a,#111);padding:32px;border-bottom:1px solid rgba(201,168,76,0.3);">
             <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.4em;color:#c9a84c;text-transform:uppercase;">New Message</p>
@@ -49,12 +50,11 @@ exports.sendContact = async (req, res) => {
           </div>
         </div>
       `,
-    })
-
-    await sendMail({
-      to: email,
-      subject: `Hey ${name.split(' ')[0]}, your message landed safely! 🎯`,
-      html: `
+      }),
+      sendMail({
+        to: email,
+        subject: `Hey ${name.split(' ')[0]}, your message landed safely! 🎯`,
+        html: `
         <div style="font-family:'Helvetica Neue',sans-serif;max-width:520px;margin:0 auto;background:#0d0d0d;color:#e8e8e8;border-radius:12px;overflow:hidden;">
           <div style="background:linear-gradient(135deg,#1a1a1a,#111);padding:36px 32px;border-bottom:1px solid rgba(201,168,76,0.3);">
             <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.4em;color:#c9a84c;text-transform:uppercase;">Zhanx Studio</p>
@@ -81,7 +81,8 @@ exports.sendContact = async (req, res) => {
           </div>
         </div>
       `,
-    })
+      }),
+    ])
 
     return res.status(200).json({
       success: true,
