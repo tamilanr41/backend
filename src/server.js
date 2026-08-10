@@ -27,6 +27,7 @@ app.get('/health', (req, res) => {
 })
 app.use('/api/contact', require('./routes/contact'))
 app.use('/api', require('./routes/portfolio'))
+app.use('/api/mentor', require('./routes/mentor'))
 app.use(notFound)
 app.use(errorHandler)
 app.listen(PORT, () => {
