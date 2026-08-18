@@ -10,6 +10,9 @@ const allowedOrigins = [
   'http://localhost:3000',
   'https://subashportfolio1.netlify.app',
   'https://sprightly-hamster-71d3ea.netlify.app',
+  'https://tiny-treacle-d855ca.netlify.app',
+  'https://zhanxstudio.in',
+  'https://www.zhanxstudio.in',
   process.env.CLIENT_URL,
 ].filter(Boolean)
 app.use(cors({
