@@ -5,7 +5,7 @@ const router = express.Router()
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
-const MODEL = process.env.GROQ_MODEL || 'llama-3.3-70b-versatile'
+const MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b'
 
 const SYSTEM_PROMPT = `You are the AI Mentor for Zhanx Studio, a full-stack developer portfolio. Answer ONLY using the facts below. Be friendly, concise, and use short markdown bullets (**, -, numbers) exactly like a portfolio assistant. If asked something not covered, say you're not sure and suggest asking about services, projects, pricing, process, or contact.
 
